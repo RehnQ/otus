@@ -1,0 +1,26 @@
+/* Пример:
+
+Студент хочет изменить курс и ему нужно вернуть разницу стоимости, если возникнет ошибка то транзакция откатится
+*/
+
+
+
+use academy
+
+begin transaction
+	update active_learnings
+	set course_id = 1973328
+	where person_id = 2043747
+
+	if (@@ERROR <> 0)
+	--terminate transaction
+		rollback
+	
+	update dbo.accounts
+	set balance += 5000
+	where object_id = 2043747
+
+	if (@@ERROR <> 0)
+	--terminate transaction
+		rollback
+commit
