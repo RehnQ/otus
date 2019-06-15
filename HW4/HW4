@@ -1,0 +1,15 @@
+Добавлены индексы:
+
+в таблицу accounts индекс по balance для фильтрации
+в таблицу active_learnings индекс по внешним ключам course_id, person_id
+в таблицу learnings индекс по course_id, person_id и score для фильтрации и по внешнему ключу (person_id)
+в таблицу students индекс по fullname, login и email для фильтрации
+в таблицу transactions индекс по date и account_id для фильтрации по дате и внешнему ключу (account_id)
+
+Добавлены ограничения в таблицу transactions, для добавления транзакций на приход/списание только положительных сумм больше 0
+
+ALTER TABLE transactions  
+ADD CONSTRAINT CHK_Trn CHECK (receipt > 0 AND expense > 0) 
+
+
+
