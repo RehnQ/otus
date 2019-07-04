@@ -1,0 +1,50 @@
+
+1. Запросы на встравку данных INSERT VALUES
+
+insert into students (id, fullname, login, email, birth_date, sex, position_parent_id)
+values(
+1198568,'Маргун Дмитрий Васильевич', 'user_93595',	'margun@mail.com', '1980-02-11',	'm', 1069249)
+,(2084127,	'Никитин Марс Анатольевич',	'user_83646',	'niktin@mail.com',	'1989-03-01',	'm',	2349225)
+,(8098008,	'Портас Андрей Васильевич',	'user_31753',	'portas@mail.com',	'1967-04-05',	'm',	3200775)
+,(4142636,	'Балкова Дарья Миннеахметовна',	'user_53826',	'balkova@mail.com','1976-02-22',	'f',	3208676)
+,(4445482,	'Шерстнев Вадим Алексеевич',	'user_08467',	'sherstnev@mail.com',	'2000-07-29',	'm',	1441920)
+,(5834300,	'Сидорович Николай Сергеевич',	'user_12335',	'sidorovich@mail.com',	'1985-03-17',	'm',	1069249)
+,(6621915,	'Фрлова Ольга Дмитриевна',	'user_54172',	'frolova@mail.com',	'1977-06-13',	'f',	3647374)
+,(6849777,	'Песчаный Кирилл Николаевич',	'user_08176',	'peschnyi@mail.com',	'1961-12-21',	'm',	1441920)
+,(7806269,	'Ванюшин Иван Каретович',	'user_32134',	'vanyshin@mail.com',	'1972-08-02',	'm',	1069249)
+,(7372074,	'Тен Ирина Николаевна',	'user_23414',	'ten@mail.com',	'1988-04-06',	'f',	1441920)
+,(3848897,	'Облов Марсель Юрьевич',	'user_98631',	'oblov@mail.com',	'1982-01-06',	'm',	2349225)
+
+
+2. Запросы на insert с использованием Select
+
+INSERT INTO
+    active_learnings(person_id)
+SELECT
+    id
+FROM
+    students
+WHERE
+    fullname in ('Никитин Марс Анатольевич', 'Песчаный Кирилл Николаевич', 'Горелов Роман Евгеньевич')
+
+
+3. Изменение данных UPDATE, UPDATE с использованием JOIN
+
+UPDATE accounts 
+SET currency_type_id = 'USD'
+FROM  accounts
+       JOIN students on students.id = accounts.object_id
+WHERE students.id = 6849727
+
+4. Delete
+
+  delete from accounts
+  where currency_type_id is null
+
+5. Процедура со вставкой и обновлением блока 
+6. Merge – потренироваться и прочувствовать
+
+
+MERGE INTO accounts USING (SELECT fullname, id
+FROM students) a ON (accounts.object_id = a.id) 
+WHEN NOT MATCHED THEN INSERT (name, object_id) VALUES (a.fullname, a.id);
