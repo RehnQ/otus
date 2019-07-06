@@ -45,6 +45,8 @@ WHERE students.id = 6849727
 6. Merge – потренироваться и прочувствовать
 
 
+use academy
 MERGE INTO accounts USING (SELECT fullname, id
 FROM students) a ON (accounts.object_id = a.id) 
+when matched then update set name = a.fullname, object_id = a.id
 WHEN NOT MATCHED THEN INSERT (name, object_id) VALUES (a.fullname, a.id);
