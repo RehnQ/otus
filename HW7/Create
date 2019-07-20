@@ -1,0 +1,5 @@
+docker run --name voip -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123 test/voip
+docker exec -it voip /bin/bash
+Mysql -u -p
+Create user 'user'@'%' identified by '123';
+Grant all privileges on *.* to 'user'@'%' with grant option;
