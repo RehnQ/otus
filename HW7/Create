@@ -3,3 +3,5 @@ docker exec -it voip /bin/bash
 Mysql -u -p
 Create user 'user'@'%' identified by '123';
 Grant all privileges on *.* to 'user'@'%' with grant option;
+
+ docker build -t test/voip .
